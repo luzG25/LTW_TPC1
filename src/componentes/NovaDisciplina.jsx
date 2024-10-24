@@ -25,20 +25,19 @@ const NovaDisciplina = (props) => {
   };
 
   return (
-    {!estaAdicionando && 
-      ( <button onClick={startAddingHandler}>Nova Disciplina</button> 
+    <>
+      { !estaAdicionando && 
+        <button onClick={startAddingHandler}>Nova Disciplina</button>
+      }
 
-      )
-    }
-
-    { estaAdicionando &&
-      <FormNovaDisciplina
-      onSaveDisciplinaData={guardarDisciplinaHandler}
-      onCancel={stopAddingHandler}
-    />
-    }
-    
-  );
-};
+      { estaAdicionando &&
+        <FormNovaDisciplina
+          onSaveDisciplinaData={guardarDisciplinaHandler}
+          onCancel={stopAddingHandler}
+        />
+      } 
+    </>
+  )
+}
 
 export default NovaDisciplina;

@@ -36,7 +36,7 @@ const FormNovaDisciplina = (props) => {
   };
 
   const cancelarHandler = () => {
-    
+    props.onCancel()
   }
 
   return (

@@ -1,38 +1,46 @@
-import NotaDisciplina from "./NotaDisciplina"
-import "./Disciplinas.css"
+import NotaDisciplina from "./NotaDisciplina";
+import "./Disciplinas.css";
 import Card from "./Card";
+import FiltrarDisciplinas from "./filtrarDisciplinas";
+import { useState } from 'react';
 
 function Disciplinas(props) {
     const disciplinas = props.listaDisciplinas;
 
-    return (
-        /*
-        <div >
-            {disciplinas.map((disciplina, index) => (
-                <div key={index} className="disciplinas">
-                    <NotaDisciplina 
-                        nome={disciplina.nome}
-                        valorNota={disciplina.valorNota}
-                        dataAvalia={disciplina.dataAvalia}
-                    />
-                </div>
-            ))}
-        </div>
-        */
+    let aplicarFiltro = false
 
+    // Estado para o ano filtrado
+    const [filtroAno, setFiltroAno] = useState('None');
+
+    // Função que atualiza o filtro
+    const filtroChangeHandler = (anoSelecionado) => {
+        setFiltroAno(anoSelecionado);
+    };
+
+    const disciplinasFiltradas = filtroAno === '0' 
+    ? disciplinas 
+    : disciplinas.filter(disciplina => disciplina.dataAvalia.getFullYear().toString() === filtroAno);
+
+
+    
+
+    return (
         <Card>
+            <FiltrarDisciplinas onFiltroChange={filtroChangeHandler} />
+            
             {
-                disciplinas.map((disci) => (
+                disciplinasFiltradas.map((disci) => (
                     <NotaDisciplina 
+                        key={disci.id}  
                         nome={disci.nome}
                         valorNota={disci.valorNota}
                         dataAvalia={disci.dataAvalia}
                     />
                 ))
             }
+            
         </Card>
     );
 }
-
 
 export default Disciplinas;
